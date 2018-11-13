@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 
 import com.mygdx.game.supp.TileManager;
 
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -43,11 +44,10 @@ public class TileBoard2 extends ApplicationAdapter {
     private Texture texture;
     private Image pawn;
 
-    int input;
-    String tileName;
-
     int w;
     int h;
+
+    private int diceSum = 0;
 
 
     @Override
@@ -79,7 +79,6 @@ public class TileBoard2 extends ApplicationAdapter {
 //        input = scan.nextInt();
 //        tileName = "tile" + Integer.toString(input);
 
-        movePawn();
 
 //********************************************************************************************
        /*
@@ -118,26 +117,32 @@ public class TileBoard2 extends ApplicationAdapter {
 
     }
 
-    public void movePawn() {
+    public void movePawn(int diceSum) {
         layerList = tiledMap.getLayers();
         layer = layerList.get("Tiles");
         objList = layer.getObjects();
-        obj = objList.get("tile4");
+        obj = objList.get("tile" + Integer.toString(diceSum));
         objProperties = obj.getProperties();
 
         MoveToAction action = new MoveToAction();
         action.setPosition((Float) objProperties.get("x"), (Float) objProperties.get("y"));
-        action.setDuration(4);
+        action.setDuration(1);
         action.setInterpolation(Interpolation.smooth);
         pawn.addAction(action);
         stage.addActor(pawn);
     }
 
-    public void getInput()
+    public void roleDice()
     {
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
-        {
+        Random random = new Random();
+        int dice;
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+        {
+            dice = random.nextInt(6) + 1 ;
+            diceSum += dice;
+            movePawn(diceSum);
+            System.out.println(dice + "  " + diceSum);
         }
     }
 
@@ -155,6 +160,7 @@ public class TileBoard2 extends ApplicationAdapter {
         renderer.setView(camera);
         renderer.render();
 
+        roleDice();
 
         // Instead of batch and sprites
         stage.act();
