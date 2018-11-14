@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
+import com.mygdx.game.supp.Dice;
 import com.mygdx.game.supp.TileManager;
 
 import java.util.Random;
@@ -26,23 +27,23 @@ import java.util.Scanner;
 
 
 public class TileBoard2 extends ApplicationAdapter {
-    private Stage stage;
+    private static Stage stage;
 
     private OrthographicCamera camera;
     private FillViewport viewport;
 
-    private TiledMap tiledMap;
+    private static TiledMap tiledMap;
     private OrthogonalTiledMapRenderer renderer;
 
-    private MapLayers layerList;
-    private MapLayer layer;
-    private MapObjects objList;
-    private MapObject obj;
-    private MapProperties objProperties;
+    private static MapLayers layerList;
+    private static MapLayer layer;
+    private static MapObjects objList;
+    private static MapObject obj;
+    private static MapProperties objProperties;
 
 
     private Texture texture;
-    private Image pawn;
+    private static Image pawn;
 
     int w;
     int h;
@@ -64,10 +65,10 @@ public class TileBoard2 extends ApplicationAdapter {
 
         stage = new Stage(viewport);
 
-        tiledMap = new TmxMapLoader().load("board05.tmx");
+        tiledMap = new TmxMapLoader().load("board32.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-        texture = new Texture(Gdx.files.internal("lion3.png"));
+        texture = new Texture(Gdx.files.internal("lion.png"));
 
         // Creating a pawn in a starting position
         pawn = new Image(texture);
@@ -75,9 +76,6 @@ public class TileBoard2 extends ApplicationAdapter {
         pawn.setPosition(170, 100);
         stage.addActor(pawn);
 
-//        Scanner scan = new Scanner(System.in);
-//        input = scan.nextInt();
-//        tileName = "tile" + Integer.toString(input);
 
 
 //********************************************************************************************
@@ -117,7 +115,7 @@ public class TileBoard2 extends ApplicationAdapter {
 
     }
 
-    public void movePawn(int diceSum) {
+    public static void movePawn(int diceSum) {
         layerList = tiledMap.getLayers();
         layer = layerList.get("Tiles");
         objList = layer.getObjects();
@@ -132,7 +130,7 @@ public class TileBoard2 extends ApplicationAdapter {
         stage.addActor(pawn);
     }
 
-    public void roleDice()
+    /*public void roleDice()
     {
         Random random = new Random();
         int dice;
@@ -144,7 +142,7 @@ public class TileBoard2 extends ApplicationAdapter {
             movePawn(diceSum);
             System.out.println(dice + "  " + diceSum);
         }
-    }
+    }*/
 
 
     @Override
@@ -160,7 +158,7 @@ public class TileBoard2 extends ApplicationAdapter {
         renderer.setView(camera);
         renderer.render();
 
-        roleDice();
+        Dice.rollAndMove();
 
         // Instead of batch and sprites
         stage.act();
