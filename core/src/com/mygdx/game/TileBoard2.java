@@ -6,10 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.*;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -20,11 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
 import com.mygdx.game.supp.Dice;
-import com.mygdx.game.supp.TileManager;
-
-import java.util.Random;
-import java.util.Scanner;
-
 
 public class TileBoard2 extends ApplicationAdapter {
     private static Stage stage;
@@ -48,11 +40,10 @@ public class TileBoard2 extends ApplicationAdapter {
     int w;
     int h;
 
-    private int diceSum = 0;
-
 
     @Override
-    public void create() {
+    public void create()
+    {
 
         // Dimensions of TiledMap
         w = 720;
@@ -115,7 +106,8 @@ public class TileBoard2 extends ApplicationAdapter {
 
     }
 
-    public static void movePawn(int diceSum) {
+    public static void movePawn(int diceSum)
+    {
         layerList = tiledMap.getLayers();
         layer = layerList.get("Tiles");
         objList = layer.getObjects();
@@ -130,23 +122,10 @@ public class TileBoard2 extends ApplicationAdapter {
         stage.addActor(pawn);
     }
 
-    /*public void roleDice()
-    {
-        Random random = new Random();
-        int dice;
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
-        {
-            dice = random.nextInt(6) + 1 ;
-            diceSum += dice;
-            movePawn(diceSum);
-            System.out.println(dice + "  " + diceSum);
-        }
-    }*/
-
 
     @Override
-    public void render() {
+    public void render()
+    {
         Gdx.gl.glClearColor(.9038f, .9038f, .9038f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -167,8 +146,10 @@ public class TileBoard2 extends ApplicationAdapter {
 
 
     @Override
-    public void dispose() {
+    public void dispose()
+    {
         tiledMap.dispose();
+        stage.dispose();
     }
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="30" tileheight="30" infinite="0" nextobjectid="71">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="30" tileheight="30" infinite="0" nextobjectid="81">
  <tileset firstgid="1" name="snake-and-ladder-game-logo-71E36F097B-seeklogo.com_" tilewidth="30" tileheight="30" tilecount="100" columns="10">
   <image source="snake-and-ladder-game-logo-71E36F097B-seeklogo.com_.png" width="300" height="300"/>
  </tileset>
@@ -223,6 +223,56 @@
   <object id="70" name="tile30" type="singleTile" x="480.875" y="329.875" width="29" height="29">
    <properties>
     <property name="No." type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="71" name="tile30" type="singleTile" x="480.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="72" name="tile29" type="singleTile" x="450.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="29"/>
+   </properties>
+  </object>
+  <object id="73" name="tile28" type="singleTile" x="420.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="28"/>
+   </properties>
+  </object>
+  <object id="74" name="tile27" type="singleTile" x="390.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="27"/>
+   </properties>
+  </object>
+  <object id="75" name="tile26" type="singleTile" x="360.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="26"/>
+   </properties>
+  </object>
+  <object id="76" name="tile25" type="singleTile" x="330.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="25"/>
+   </properties>
+  </object>
+  <object id="77" name="tile24" type="singleTile" x="300.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="24"/>
+   </properties>
+  </object>
+  <object id="78" name="tile23" type="singleTile" x="270.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="23"/>
+   </properties>
+  </object>
+  <object id="79" name="tile22" type="singleTile" x="240.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="22"/>
+   </properties>
+  </object>
+  <object id="80" name="tile21" type="singleTile" x="210.909" y="299.909" width="29" height="29">
+   <properties>
+    <property name="No." type="int" value="21"/>
    </properties>
   </object>
  </objectgroup>
