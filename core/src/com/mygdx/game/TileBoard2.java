@@ -46,8 +46,8 @@ public class TileBoard2 extends ApplicationAdapter {
     {
 
         // Dimensions of TiledMap
-        w = 720;
-        h = 540;
+        w = 704;
+        h = 512;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -59,12 +59,12 @@ public class TileBoard2 extends ApplicationAdapter {
         tiledMap = new TmxMapLoader().load("board32.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-        texture = new Texture(Gdx.files.internal("lion.png"));
+        texture = new Texture(Gdx.files.internal("icon.png"));
 
         // Creating a pawn in a starting position
         pawn = new Image(texture);
-        pawn.setSize(texture.getWidth() * .035f, texture.getHeight() * .035f);
-        pawn.setPosition(170, 100);
+        pawn.setSize(texture.getWidth() * .5f, texture.getHeight() * .5f);
+        pawn.setPosition(160, 96);
         stage.addActor(pawn);
 
 
@@ -91,7 +91,7 @@ public class TileBoard2 extends ApplicationAdapter {
         Object obgLecture = obgProperties.get("lecture");
 
         System.out.printf("layer: %s%nobjects no.: %d%nTile Name: %s%nLecture: %s%nPositioned: %s x, %s y",
-                layerProperty, countObjects, obg.getName(), obgLecture, obgProperties.get("x"), obgProperties.get("y"));
+                 layerProperty, countObjects, obg.getName(), obgLecture, obgProperties.get("x"), obgProperties.get("y"));
        */
 //********************************************************************************************
         /*
@@ -136,6 +136,7 @@ public class TileBoard2 extends ApplicationAdapter {
 //        renderer.setView((OrthographicCamera) viewport.getCamera());
         renderer.setView(camera);
         renderer.render();
+
 
         Dice.rollAndMove();
 
