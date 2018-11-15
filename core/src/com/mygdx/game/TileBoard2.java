@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.supp.Dice;
 
 public class TileBoard2 extends ApplicationAdapter {
@@ -46,8 +47,8 @@ public class TileBoard2 extends ApplicationAdapter {
     {
 
         // Dimensions of TiledMap
-        w = 720;
-        h = 540;
+        w = 12800;
+        h = 7680;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -56,7 +57,7 @@ public class TileBoard2 extends ApplicationAdapter {
 
         stage = new Stage(viewport);
 
-        tiledMap = new TmxMapLoader().load("board32.tmx");
+        tiledMap = new TmxMapLoader().load("board640C.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         texture = new Texture(Gdx.files.internal("lion.png"));
