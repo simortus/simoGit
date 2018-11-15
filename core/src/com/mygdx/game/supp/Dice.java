@@ -19,7 +19,16 @@ public class Dice
         {
             dice = random.nextInt(6) + 1 ;
             diceSum += dice;
-            TileBoard2.movePawn(diceSum);
+            if(diceSum <= 100){
+                if(diceSum == 100){
+                    System.out.println("CONGRATULATION !!!!");
+                }
+                TileBoard2.movePawn(diceSum);
+            }else{
+                diceSum -= dice;
+            }
+
+
             System.out.println(dice + "  " + diceSum);
         }
     }

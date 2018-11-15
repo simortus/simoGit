@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -60,12 +59,12 @@ public class TileBoard2 extends ApplicationAdapter {
         tiledMap = new TmxMapLoader().load("board640C.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-        texture = new Texture(Gdx.files.internal("lion.png"));
+        texture = new Texture(Gdx.files.internal("icon.png"));
 
         // Creating a pawn in a starting position
         pawn = new Image(texture);
-        pawn.setSize(texture.getWidth() * .035f, texture.getHeight() * .035f);
-        pawn.setPosition(170, 100);
+        pawn.setSize(texture.getWidth() * .5f, texture.getHeight() * .5f);
+        pawn.setPosition(160, 96);
         stage.addActor(pawn);
 
 
@@ -92,7 +91,7 @@ public class TileBoard2 extends ApplicationAdapter {
         Object obgLecture = obgProperties.get("lecture");
 
         System.out.printf("layer: %s%nobjects no.: %d%nTile Name: %s%nLecture: %s%nPositioned: %s x, %s y",
-                layerProperty, countObjects, obg.getName(), obgLecture, obgProperties.get("x"), obgProperties.get("y"));
+                 layerProperty, countObjects, obg.getName(), obgLecture, obgProperties.get("x"), obgProperties.get("y"));
        */
 //********************************************************************************************
         /*
@@ -137,6 +136,7 @@ public class TileBoard2 extends ApplicationAdapter {
 //        renderer.setView((OrthographicCamera) viewport.getCamera());
         renderer.setView(camera);
         renderer.render();
+
 
         Dice.rollAndMove();
 
