@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="640" tileheight="640" infinite="0" nextobjectid="1">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="640" tileheight="640" infinite="0" nextobjectid="105">
  <tileset firstgid="1" name="SoftWhite_Edited_2018" tilewidth="640" tileheight="640" tilecount="1" columns="1">
   <image source="SoftWhite_Edited_2018.jpg" width="1000" height="1000"/>
  </tileset>
@@ -22,4 +22,112 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
+ <objectgroup name="Tiles">
+  <object id="1" name="0" x="2560" y="6400" width="640" height="640"/>
+  <object id="2" name="1" x="3200" y="6400" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="38"/>
+    <property name="special" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="3" name="2" x="3840" y="6400" width="640" height="640"/>
+  <object id="4" name="3" x="4480" y="6400" width="640" height="640"/>
+  <object id="5" name="4" x="5120" y="6400" width="640" height="640"/>
+  <object id="6" name="5" x="5760" y="6400" width="640" height="640"/>
+  <object id="7" name="6" x="6400" y="6400" width="640" height="640"/>
+  <object id="8" name="7" x="7040" y="6400" width="640" height="640"/>
+  <object id="10" name="8" x="7680" y="6400" width="640" height="640"/>
+  <object id="11" name="9" x="8320" y="6400" width="640" height="640"/>
+  <object id="12" name="10" x="8960" y="6400" width="640" height="640"/>
+  <object id="13" name="11" x="8960" y="5760" width="640" height="640"/>
+  <object id="14" name="12" x="8320" y="5760" width="640" height="640"/>
+  <object id="15" name="13" x="7680" y="5760" width="640" height="640"/>
+  <object id="16" name="14" x="7040" y="5760" width="640" height="640"/>
+  <object id="17" name="15" x="6400" y="5760" width="640" height="640"/>
+  <object id="18" name="16" x="5760" y="5760" width="640" height="640"/>
+  <object id="19" name="17" x="5120" y="5760" width="640" height="640"/>
+  <object id="20" name="18" x="4480" y="5760" width="640" height="640"/>
+  <object id="21" name="19" x="3840" y="5760" width="640" height="640"/>
+  <object id="22" name="20" x="3200" y="5760" width="640" height="640"/>
+  <object id="24" name="21" x="3200" y="5120" width="640" height="640"/>
+  <object id="25" name="22" x="3840" y="5120" width="640" height="640"/>
+  <object id="26" name="23" x="4480" y="5120" width="640" height="640"/>
+  <object id="27" name="24" x="5120" y="5120" width="640" height="640"/>
+  <object id="28" name="25" x="5760" y="5120" width="640" height="640"/>
+  <object id="29" name="26" x="6400" y="5120" width="640" height="640"/>
+  <object id="30" name="27" x="7040" y="5120" width="640" height="640"/>
+  <object id="31" name="28" x="7680" y="5120" width="640" height="640"/>
+  <object id="32" name="29" x="8320" y="5120" width="640" height="640"/>
+  <object id="33" name="30" x="8960" y="5120" width="640" height="640"/>
+  <object id="34" name="31" x="8960" y="4480" width="640" height="640"/>
+  <object id="35" name="32" x="8320" y="4480" width="640" height="640"/>
+  <object id="36" name="33" x="7680" y="4480" width="640" height="640"/>
+  <object id="37" name="34" x="7040" y="4480" width="640" height="640"/>
+  <object id="38" name="35" x="6400" y="4480" width="640" height="640"/>
+  <object id="39" name="36" x="5760" y="4480" width="640" height="640"/>
+  <object id="40" name="37" x="5120" y="4480" width="640" height="640"/>
+  <object id="41" name="38" x="4480" y="4480" width="640" height="640"/>
+  <object id="42" name="39" x="3840" y="4480" width="640" height="640"/>
+  <object id="43" name="40" x="3200" y="4480" width="640" height="640"/>
+  <object id="44" name="41" x="3200" y="3840" width="640" height="640"/>
+  <object id="46" name="42" x="3840" y="3840" width="640" height="640"/>
+  <object id="47" name="43" x="4480" y="3840" width="640" height="640"/>
+  <object id="48" name="44" x="5120" y="3840" width="640" height="640"/>
+  <object id="49" name="45" x="5760" y="3840" width="640" height="640"/>
+  <object id="50" name="46" x="6400" y="3840" width="640" height="640"/>
+  <object id="51" name="47" x="7040" y="3840" width="640" height="640"/>
+  <object id="52" name="48" x="7680" y="3840" width="640" height="640"/>
+  <object id="53" name="49" x="8320" y="3840" width="640" height="640"/>
+  <object id="54" name="50" x="8960" y="3840" width="640" height="640"/>
+  <object id="55" name="51" x="8960" y="3200" width="640" height="640"/>
+  <object id="56" name="52" x="8320" y="3200" width="640" height="640"/>
+  <object id="57" name="53" x="7680" y="3200" width="640" height="640"/>
+  <object id="58" name="54" x="7040" y="3200" width="640" height="640"/>
+  <object id="59" name="55" x="6400" y="3200" width="640" height="640"/>
+  <object id="60" name="56" x="5760" y="3200" width="640" height="640"/>
+  <object id="61" name="57" x="5120" y="3200" width="640" height="640"/>
+  <object id="62" name="58" x="4480" y="3200" width="640" height="640"/>
+  <object id="63" name="59" x="3840" y="3200" width="640" height="640"/>
+  <object id="64" name="60" x="3200" y="3200" width="640" height="640"/>
+  <object id="65" name="61" x="3200" y="2560" width="640" height="640"/>
+  <object id="66" name="62" x="3840" y="2560" width="640" height="640"/>
+  <object id="67" name="63" x="4480" y="2560" width="640" height="640"/>
+  <object id="68" name="64" x="5120" y="2560" width="640" height="640"/>
+  <object id="69" name="65" x="5760" y="2560" width="640" height="640"/>
+  <object id="70" name="66" x="6400" y="2560" width="640" height="640"/>
+  <object id="71" name="67" x="7040" y="2560" width="640" height="640"/>
+  <object id="72" name="68" x="7680" y="2560" width="640" height="640"/>
+  <object id="73" name="69" x="8320" y="2560" width="640" height="640"/>
+  <object id="74" name="70" x="8960" y="2560" width="640" height="640"/>
+  <object id="75" name="71" x="8960" y="1920" width="640" height="640"/>
+  <object id="76" name="72" x="8320" y="1920" width="640" height="640"/>
+  <object id="77" name="73" x="7680" y="1920" width="640" height="640"/>
+  <object id="78" name="74" x="7040" y="1920" width="640" height="640"/>
+  <object id="79" name="75" x="6400" y="1920" width="640" height="640"/>
+  <object id="80" name="76" x="5760" y="1920" width="640" height="640"/>
+  <object id="81" name="77" x="5120" y="1920" width="640" height="640"/>
+  <object id="82" name="78" x="4480" y="1920" width="640" height="640"/>
+  <object id="83" name="79" x="3840" y="1920" width="640" height="640"/>
+  <object id="84" name="80" x="3200" y="1920" width="640" height="640"/>
+  <object id="85" name="81" x="3200" y="1280" width="640" height="640"/>
+  <object id="86" name="82" x="3840" y="1280" width="640" height="640"/>
+  <object id="87" name="83" x="4480" y="1280" width="640" height="640"/>
+  <object id="88" name="84" x="5120" y="1280" width="640" height="640"/>
+  <object id="89" name="85" x="5760" y="1280" width="640" height="640"/>
+  <object id="90" name="86" x="6400" y="1280" width="640" height="640"/>
+  <object id="91" name="87" x="7040" y="1280" width="640" height="640"/>
+  <object id="92" name="88" x="7680" y="1280" width="640" height="640"/>
+  <object id="93" name="89" x="8320" y="1280" width="640" height="640"/>
+  <object id="94" name="90" x="8960" y="1280" width="640" height="640"/>
+  <object id="95" name="91" x="8960" y="640" width="640" height="640"/>
+  <object id="96" name="92" x="8320" y="640" width="640" height="640"/>
+  <object id="97" name="93" x="7680" y="640" width="640" height="640"/>
+  <object id="98" name="94" x="7040" y="640" width="640" height="640"/>
+  <object id="99" name="95" x="6400" y="640" width="640" height="640"/>
+  <object id="100" name="96" x="5760" y="640" width="640" height="640"/>
+  <object id="101" name="97" x="5120" y="640" width="640" height="640"/>
+  <object id="102" name="98" x="4480" y="640" width="640" height="640"/>
+  <object id="103" name="99" x="3840" y="640" width="640" height="640"/>
+  <object id="104" name="100" x="3200" y="640" width="640" height="640"/>
+ </objectgroup>
 </map>

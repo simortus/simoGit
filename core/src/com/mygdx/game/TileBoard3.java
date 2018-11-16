@@ -30,9 +30,9 @@ public class TileBoard3 extends ApplicationAdapter
 
     private static MapLayers layerList;
     private static MapLayer layer;
-    private static MapObjects objList;
-    private static MapObject obj;
-    private static MapProperties objProperties;
+    private static MapObjects tileList; // List of objects
+    private static MapObject tile; // An object from the list
+    private static MapProperties tileProperties; // List with object properties
 
 
     private Texture texture;
@@ -64,59 +64,56 @@ public class TileBoard3 extends ApplicationAdapter
 
         // Creating a pawn in a starting position
         pawn = new Image(texture);
-        pawn.setSize(texture.getWidth() * .5f, texture.getHeight() * .5f);
-        pawn.setPosition(160, 96);
-        stage.addActor(pawn);
-
-
-
-//********************************************************************************************
-       /*
-        // Getting an Array with the layers of our tiledMap
+        pawn.setSize(texture.getWidth()*8, texture.getHeight()*8);
         layerList = tiledMap.getLayers();
-        // Getting a specific layer from the layerList
-        layer = layerList.get("Tiles");    // Equal to .get(3)
-        // Getting a property of the layer (e.g name)
-        String layerProperty = layer.getName();
-
-        // Getting an Array of the layer's MapObjects
-        MapObjects objectList = layer.getObjects();
-        // Checking how many MapObjects the layer has
-        int countObjects = objectList.getCount();
-        // Getting a MapObject, in our case a created rectangle-tile
-        MapObject obg = objectList.get("tile004");
-
-        // Getting an Array of the MapObject properties
-        MapProperties obgProperties = obg.getProperties();
-        // Getting a Value of the tile's MapProperties using its key
-        Object obgLecture = obgProperties.get("lecture");
-
-        System.out.printf("layer: %s%nobjects no.: %d%nTile Name: %s%nLecture: %s%nPositioned: %s x, %s y",
-                 layerProperty, countObjects, obg.getName(), obgLecture, obgProperties.get("x"), obgProperties.get("y"));
-       */
-//********************************************************************************************
-        /*
-        MoveToAction action = new MoveToAction();
-        action.setPosition((Float) obgProperties.get("x"), (Float) obgProperties.get("y"));
-        action.setDuration(4);
-        action.setInterpolation(Interpolation.smooth);
-        pawn.addAction(action);
+        layer = layerList.get("Tiles");
+        tileList = layer.getObjects();
+        tile = tileList.get("0");
+        tileProperties = tile.getProperties();
+        pawn.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
         stage.addActor(pawn);
-        */
-//********************************************************************************************
+
 
     }
 
-    public static void movePawn(int diceSum)
+    // Getting the properties of the current tile using the dice
+    // Used in checkTileForSpecial and movePawn
+    public static MapProperties getTileProperties(int tileNum)
     {
         layerList = tiledMap.getLayers();
         layer = layerList.get("Tiles");
-        objList = layer.getObjects();
-        obj = objList.get("tile" + Integer.toString(diceSum));
-        objProperties = obj.getProperties();
+        tileList = layer.getObjects();
+        tile = tileList.get(Integer.toString(tileNum));
+        tileProperties = tile.getProperties();
+
+        return tileProperties;
+    }
+
+    public static int getTargetTileNum(MapProperties tileProperties)
+    {
+        return (Integer) tileProperties.get("goto");
+    }
+
+    // Checking if the tile contains the special property and if yes getting it
+    public static boolean checkTileForSpecial(int tileNum)
+    {
+        MapProperties tileProperties = getTileProperties(tileNum);
+        boolean containSpecial = tileProperties.containsKey("special");
+
+        if (containSpecial)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static void movePawn(int tileNum)
+    {
+        MapProperties tileProperties = getTileProperties(tileNum);
 
         MoveToAction action = new MoveToAction();
-        action.setPosition((Float) objProperties.get("x"), (Float) objProperties.get("y"));
+        action.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
         action.setDuration(1);
         action.setInterpolation(Interpolation.smooth);
         pawn.addAction(action);
