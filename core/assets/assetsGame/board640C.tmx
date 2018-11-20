@@ -34,7 +34,12 @@
   <object id="4" name="3" x="4480" y="6400" width="640" height="640"/>
   <object id="5" name="4" x="5120" y="6400" width="640" height="640"/>
   <object id="6" name="5" x="5760" y="6400" width="640" height="640"/>
-  <object id="7" name="6" x="6400" y="6400" width="640" height="640"/>
+  <object id="7" name="6" x="6400" y="6400" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="17"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="8" name="7" x="7040" y="6400" width="640" height="640"/>
   <object id="10" name="8" x="7680" y="6400" width="640" height="640"/>
   <object id="11" name="9" x="8320" y="6400" width="640" height="640"/>
@@ -55,27 +60,52 @@
   <object id="27" name="24" x="5120" y="5120" width="640" height="640"/>
   <object id="28" name="25" x="5760" y="5120" width="640" height="640"/>
   <object id="29" name="26" x="6400" y="5120" width="640" height="640"/>
-  <object id="30" name="27" x="7040" y="5120" width="640" height="640"/>
+  <object id="30" name="27" x="7040" y="5120" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="36"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="31" name="28" x="7680" y="5120" width="640" height="640"/>
   <object id="32" name="29" x="8320" y="5120" width="640" height="640"/>
   <object id="33" name="30" x="8960" y="5120" width="640" height="640"/>
   <object id="34" name="31" x="8960" y="4480" width="640" height="640"/>
   <object id="35" name="32" x="8320" y="4480" width="640" height="640"/>
-  <object id="36" name="33" x="7680" y="4480" width="640" height="640"/>
+  <object id="36" name="33" x="7680" y="4480" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="50"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="37" name="34" x="7040" y="4480" width="640" height="640"/>
   <object id="38" name="35" x="6400" y="4480" width="640" height="640"/>
   <object id="39" name="36" x="5760" y="4480" width="640" height="640"/>
   <object id="40" name="37" x="5120" y="4480" width="640" height="640"/>
   <object id="41" name="38" x="4480" y="4480" width="640" height="640"/>
-  <object id="42" name="39" x="3840" y="4480" width="640" height="640"/>
+  <object id="42" name="39" x="3840" y="4480" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="3"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="43" name="40" x="3200" y="4480" width="640" height="640"/>
   <object id="44" name="41" x="3200" y="3840" width="640" height="640"/>
   <object id="46" name="42" x="3840" y="3840" width="640" height="640"/>
   <object id="47" name="43" x="4480" y="3840" width="640" height="640"/>
   <object id="48" name="44" x="5120" y="3840" width="640" height="640"/>
-  <object id="49" name="45" x="5760" y="3840" width="640" height="640"/>
+  <object id="49" name="45" x="5760" y="3840" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="68"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="50" name="46" x="6400" y="3840" width="640" height="640"/>
-  <object id="51" name="47" x="7040" y="3840" width="640" height="640"/>
+  <object id="51" name="47" x="7040" y="3840" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="15"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="52" name="48" x="7680" y="3840" width="640" height="640"/>
   <object id="53" name="49" x="8320" y="3840" width="640" height="640"/>
   <object id="54" name="50" x="8960" y="3840" width="640" height="640"/>
@@ -87,7 +117,12 @@
   <object id="60" name="56" x="5760" y="3200" width="640" height="640"/>
   <object id="61" name="57" x="5120" y="3200" width="640" height="640"/>
   <object id="62" name="58" x="4480" y="3200" width="640" height="640"/>
-  <object id="63" name="59" x="3840" y="3200" width="640" height="640"/>
+  <object id="63" name="59" x="3840" y="3200" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="85"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="64" name="60" x="3200" y="3200" width="640" height="640"/>
   <object id="65" name="61" x="3200" y="2560" width="640" height="640"/>
   <object id="66" name="62" x="3840" y="2560" width="640" height="640"/>
@@ -98,13 +133,28 @@
   <object id="71" name="67" x="7040" y="2560" width="640" height="640"/>
   <object id="72" name="68" x="7680" y="2560" width="640" height="640"/>
   <object id="73" name="69" x="8320" y="2560" width="640" height="640"/>
-  <object id="74" name="70" x="8960" y="2560" width="640" height="640"/>
+  <object id="74" name="70" x="8960" y="2560" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="30"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="75" name="71" x="8960" y="1920" width="640" height="640"/>
-  <object id="76" name="72" x="8320" y="1920" width="640" height="640"/>
+  <object id="76" name="72" x="8320" y="1920" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="95"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="77" name="73" x="7680" y="1920" width="640" height="640"/>
   <object id="78" name="74" x="7040" y="1920" width="640" height="640"/>
   <object id="79" name="75" x="6400" y="1920" width="640" height="640"/>
-  <object id="80" name="76" x="5760" y="1920" width="640" height="640"/>
+  <object id="80" name="76" x="5760" y="1920" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="44"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="81" name="77" x="5120" y="1920" width="640" height="640"/>
   <object id="82" name="78" x="4480" y="1920" width="640" height="640"/>
   <object id="83" name="79" x="3840" y="1920" width="640" height="640"/>
@@ -121,13 +171,23 @@
   <object id="94" name="90" x="8960" y="1280" width="640" height="640"/>
   <object id="95" name="91" x="8960" y="640" width="640" height="640"/>
   <object id="96" name="92" x="8320" y="640" width="640" height="640"/>
-  <object id="97" name="93" x="7680" y="640" width="640" height="640"/>
+  <object id="97" name="93" x="7680" y="640" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="61"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="98" name="94" x="7040" y="640" width="640" height="640"/>
   <object id="99" name="95" x="6400" y="640" width="640" height="640"/>
   <object id="100" name="96" x="5760" y="640" width="640" height="640"/>
   <object id="101" name="97" x="5120" y="640" width="640" height="640"/>
   <object id="102" name="98" x="4480" y="640" width="640" height="640"/>
-  <object id="103" name="99" x="3840" y="640" width="640" height="640"/>
+  <object id="103" name="99" x="3840" y="640" width="640" height="640">
+   <properties>
+    <property name="goto" type="int" value="88"/>
+    <property name="special" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="104" name="100" x="3200" y="640" width="640" height="640"/>
  </objectgroup>
 </map>

@@ -11,11 +11,12 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.supp.Dice;
 
 public class TileBoard3 extends ApplicationAdapter
@@ -73,7 +74,19 @@ public class TileBoard3 extends ApplicationAdapter
         pawn.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
         stage.addActor(pawn);
 
+        /*MoveToAction action1 = new MoveToAction();
+        action1.setPosition((Float) tileProperties.get("x") + 640, (Float) tileProperties.get("y"));
+        action1.setDuration(1);
+        action1.setInterpolation(Interpolation.smooth);
+        MoveToAction action2 = new MoveToAction();
+        action2.setPosition((Float) tileProperties.get("x") + 1920, (Float) tileProperties.get("y") + 1920);
+        action2.setDuration(1);
+        action2.setInterpolation(Interpolation.smooth);
 
+        SequenceAction sequentialActions = new SequenceAction();
+        sequentialActions.addAction(action1);
+        sequentialActions.addAction(action2);
+        pawn.addAction(sequentialActions);*/
     }
 
     // Getting the properties of the current tile using the dice
@@ -91,6 +104,7 @@ public class TileBoard3 extends ApplicationAdapter
 
     public static int getTargetTileNum(MapProperties tileProperties)
     {
+        // Returns the value of the "goto" property
         return (Integer) tileProperties.get("goto");
     }
 
@@ -108,16 +122,25 @@ public class TileBoard3 extends ApplicationAdapter
         return false;
     }
 
-    public static void movePawn(int tileNum)
+    public static void movePawn(int tileNum, int targetTileNum)
     {
         MapProperties tileProperties = getTileProperties(tileNum);
+        MapProperties targetTileProperties = getTileProperties(targetTileNum);
 
-        MoveToAction action = new MoveToAction();
-        action.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
-        action.setDuration(1);
-        action.setInterpolation(Interpolation.smooth);
-        pawn.addAction(action);
-        stage.addActor(pawn);
+        if(targetTileNum == 0)
+        {
+            MoveToAction action = new MoveToAction();
+            action.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
+            action.setDuration(1);
+            action.setInterpolation(Interpolation.smooth);
+            pawn.addAction(action);
+//            stage.addActor(pawn);
+        }else {
+            SequenceAction sequentialActions = new SequenceAction();
+            sequentialActions.addAction(Actions.moveTo((Float) tileProperties.get("x"), (Float) tileProperties.get("y"), 1, Interpolation.smooth));
+            sequentialActions.addAction(Actions.moveTo((Float) targetTileProperties.get("x"), (Float) targetTileProperties.get("y"), 1, Interpolation.smooth));
+            pawn.addAction(sequentialActions);
+        }
     }
 
 
