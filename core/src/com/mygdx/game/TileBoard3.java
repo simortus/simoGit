@@ -170,7 +170,6 @@ public class TileBoard3 extends ApplicationAdapter
         mainStage.draw();
         Dice.rollAndMove();
         diceAudio();
-        diceImage();
     }
 
 

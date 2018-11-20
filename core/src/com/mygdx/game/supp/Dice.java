@@ -22,16 +22,13 @@ public class Dice
             tileNum += dice;
             if(tileNum <= 100)
             {
+                DiceDisplay.diceImage(dice);
                 if(tileNum == 100){
                     System.out.println("CONGRATULATION !!!!");
-
-
 
                 }
                 if(TileBoard3.checkTileForSpecial(tileNum)) // If contains special
                 {
-
-
                     targetTileNum = TileBoard3.getTargetTileNum(TileBoard3.getTileProperties(tileNum));
                     TileBoard3.movePawn(tileNum, targetTileNum);
                     // Setting the new tile number
