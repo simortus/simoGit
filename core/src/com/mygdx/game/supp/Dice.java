@@ -10,7 +10,7 @@ import com.mygdx.game.TileBoard3;
 public class Dice
 {
     private static Random random = new Random();
-    private static int dice;
+    public static int dice;
     private static int tileNum = 0;
     private static int targetTileNum = 0;
 
@@ -24,12 +24,13 @@ public class Dice
             {
                 if(tileNum == 100){
                     System.out.println("CONGRATULATION !!!!");
+
+
+
                 }
                 if(TileBoard3.checkTileForSpecial(tileNum)) // If contains special
                 {
-                    /*// Delaying the program
-                    try { Thread.sleep(1000); }
-                    catch(InterruptedException ex) { Thread.currentThread().interrupt();}*/
+
 
                     targetTileNum = TileBoard3.getTargetTileNum(TileBoard3.getTileProperties(tileNum));
                     TileBoard3.movePawn(tileNum, targetTileNum);

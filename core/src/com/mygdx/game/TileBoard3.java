@@ -19,9 +19,12 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 
 import com.mygdx.game.supp.Dice;
 
+import static com.mygdx.game.supp.DiceDisplay.diceImage;
+import static com.mygdx.game.supp.DiceSound.diceAudio;
+
 public class TileBoard3 extends ApplicationAdapter
 {
-    private static Stage stage;
+    public static Stage mainStage;
 
     private OrthographicCamera camera;
     private FillViewport viewport;
@@ -56,7 +59,7 @@ public class TileBoard3 extends ApplicationAdapter
         camera.update();
         viewport = new FillViewport(w, h, camera);
 
-        stage = new Stage(viewport);
+        mainStage = new Stage(viewport);
 
         tiledMap = new TmxMapLoader().load("board640C.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -72,7 +75,7 @@ public class TileBoard3 extends ApplicationAdapter
         tile = tileList.get("0");
         tileProperties = tile.getProperties();
         pawn.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
-        stage.addActor(pawn);
+        mainStage.addActor(pawn);
 
         /*MoveToAction action1 = new MoveToAction();
         action1.setPosition((Float) tileProperties.get("x") + 640, (Float) tileProperties.get("y"));
@@ -160,11 +163,14 @@ public class TileBoard3 extends ApplicationAdapter
         renderer.render();
 
 
-        Dice.rollAndMove();
+
 
         // Instead of batch and sprites
-        stage.act();
-        stage.draw();
+        mainStage.act();
+        mainStage.draw();
+        Dice.rollAndMove();
+        diceAudio();
+        diceImage();
     }
 
 
@@ -172,6 +178,6 @@ public class TileBoard3 extends ApplicationAdapter
     public void dispose()
     {
         tiledMap.dispose();
-        stage.dispose();
+        mainStage.dispose();
     }
 }
