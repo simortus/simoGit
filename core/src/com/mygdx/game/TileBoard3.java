@@ -102,6 +102,7 @@ public class TileBoard3 extends ApplicationAdapter
         return tileProperties;
     }
 
+
     public static int getTargetTileNum(MapProperties tileProperties)
     {
         // Returns the value of the "goto" property
