@@ -19,14 +19,7 @@ public class DiceDisplay {
 
     public static void diceImage(int dice) {
 
-//        tex1=new Texture(Gdx.files.internal("dice1.png"));
-//        tex2=new Texture(Gdx.files.internal("dice2.png"));
-//        tex3=new Texture(Gdx.files.internal("dice3.png"));
-//        tex4=new Texture(Gdx.files.internal("dice4.png"));
-//        tex5=new Texture(Gdx.files.internal("dice5.png"));
-//        tex6=new Texture(Gdx.files.internal("dice6.png"));
-
-        tex=new Texture(Gdx.files.internal("dice" + dice + ".png"));
+        tex = new Texture(Gdx.files.internal("dice" + dice + ".png"));
 
 
         img  = new Image(tex);

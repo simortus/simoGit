@@ -126,25 +126,38 @@ public class TileBoard3 extends ApplicationAdapter
         return false;
     }
 
-    public static void movePawn(int tileNum, int targetTileNum)
+    // This method can get divided
+    public static void movePawn(int tileNum, int targetTileNum, int dice)
     {
-        MapProperties tileProperties = getTileProperties(tileNum);
-        MapProperties targetTileProperties = getTileProperties(targetTileNum);
-
-        if(targetTileNum == 0)
+        dice -= 1;
+        SequenceAction sequenceAction = new SequenceAction();
+        while(dice >= 0)
         {
-            MoveToAction action = new MoveToAction();
+            tileNum -= dice;
+            MapProperties tileProperties = getTileProperties(tileNum);
+            sequenceAction.addAction(Actions.moveTo((Float) tileProperties.get("x"), (Float) tileProperties.get("y"), .5f, Interpolation.smooth));
+            tileNum += dice;
+            dice -= 1;
+        }
+
+        if (targetTileNum != 0)
+        {
+            MapProperties targetTileProperties = getTileProperties(targetTileNum);
+            sequenceAction.addAction(Actions.moveTo((Float) targetTileProperties.get("x"), (Float) targetTileProperties.get("y"), 1, Interpolation.smooth));
+        }
+
+        pawn.addAction(sequenceAction);
+
+            /*MoveToAction action = new MoveToAction();
             action.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
             action.setDuration(1);
             action.setInterpolation(Interpolation.smooth);
             pawn.addAction(action);
-//            stage.addActor(pawn);
         }else {
             SequenceAction sequentialActions = new SequenceAction();
             sequentialActions.addAction(Actions.moveTo((Float) tileProperties.get("x"), (Float) tileProperties.get("y"), 1, Interpolation.smooth));
             sequentialActions.addAction(Actions.moveTo((Float) targetTileProperties.get("x"), (Float) targetTileProperties.get("y"), 1, Interpolation.smooth));
-            pawn.addAction(sequentialActions);
-        }
+            pawn.addAction(sequentialActions);*/
     }
 
 
@@ -162,14 +175,13 @@ public class TileBoard3 extends ApplicationAdapter
         renderer.setView(camera);
         renderer.render();
 
-
-
-
         // Instead of batch and sprites
         mainStage.act();
         mainStage.draw();
         Dice.rollAndMove();
         diceAudio();
+
+
     }
 
 

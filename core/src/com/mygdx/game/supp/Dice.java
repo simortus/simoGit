@@ -30,13 +30,13 @@ public class Dice
                 if(TileBoard3.checkTileForSpecial(tileNum)) // If contains special
                 {
                     targetTileNum = TileBoard3.getTargetTileNum(TileBoard3.getTileProperties(tileNum));
-                    TileBoard3.movePawn(tileNum, targetTileNum);
+                    TileBoard3.movePawn(tileNum, targetTileNum, dice);
                     // Setting the new tile number
                     tileNum = targetTileNum;
                     // Clearing the targetTileNum for the next occurrence of special tile
                     targetTileNum = 0;
                 }else {
-                    TileBoard3.movePawn(tileNum, targetTileNum);
+                    TileBoard3.movePawn(tileNum, targetTileNum, dice);
                 }
             }else{
                 tileNum -= dice;
