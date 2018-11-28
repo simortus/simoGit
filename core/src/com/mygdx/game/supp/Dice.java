@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import java.util.Random;
 
 import com.mygdx.game.TileBoard3;
+import com.mygdx.game.views.PlayScreen;
 
 public class Dice
 {
@@ -19,24 +20,24 @@ public class Dice
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
         {
             dice = random.nextInt(6) + 1 ;
+            DiceDisplay.diceImage(dice);
             tileNum += dice;
             if(tileNum <= 100)
             {
-                DiceDisplay.diceImage(dice);
                 if(tileNum == 100){
                     System.out.println("CONGRATULATION !!!!");
 
                 }
-                if(TileBoard3.checkTileForSpecial(tileNum)) // If contains special
+                if(PlayScreen.checkTileForSpecial(tileNum)) // If contains special
                 {
-                    targetTileNum = TileBoard3.getTargetTileNum(TileBoard3.getTileProperties(tileNum));
-                    TileBoard3.movePawn(tileNum, targetTileNum, dice);
+                    targetTileNum = PlayScreen.getTargetTileNum(PlayScreen.getTileProperties(tileNum));
+                    PlayScreen.movePawn(tileNum, targetTileNum, dice);
                     // Setting the new tile number
                     tileNum = targetTileNum;
                     // Clearing the targetTileNum for the next occurrence of special tile
                     targetTileNum = 0;
                 }else {
-                    TileBoard3.movePawn(tileNum, targetTileNum, dice);
+                    PlayScreen.movePawn(tileNum, targetTileNum, dice);
                 }
             }else{
                 tileNum -= dice;
