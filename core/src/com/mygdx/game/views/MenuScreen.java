@@ -50,6 +50,12 @@ public class MenuScreen implements Screen {
                 Gdx.app.exit();
             }
         });
+        play.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.changeScreen(TileBoard3.APPLICATION);
+            }
+        });
     }
 
     @Override
