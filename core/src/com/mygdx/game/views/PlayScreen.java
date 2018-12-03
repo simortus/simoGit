@@ -184,7 +184,5 @@ public class PlayScreen implements Screen {
         }
 
         pawn.addAction(sequenceAction);
-
-
     }
 }
