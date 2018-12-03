@@ -67,7 +67,7 @@ public class PlayScreen implements Screen {
 
         // Creating a pawn in a starting position
         pawn = new Image(texture);
-        pawn.setSize(texture.getWidth()*8, texture.getHeight()*8);
+        pawn.setSize(texture.getWidth(), texture.getHeight());
         layerList = tiledMap.getLayers();
         layer = layerList.get("Tiles");
         tileList = layer.getObjects();
