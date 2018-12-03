@@ -67,7 +67,7 @@ public class PlayScreen implements Screen {
 
         // Creating a pawn in a starting position
         pawn = new Image(texture);
-        pawn.setSize(texture.getWidth(), texture.getHeight());
+        pawn.setSize(texture.getWidth() * .8f, texture.getHeight() * .8f);
         layerList = tiledMap.getLayers();
         layer = layerList.get("Tiles");
         tileList = layer.getObjects();
@@ -127,9 +127,8 @@ public class PlayScreen implements Screen {
     public void dispose() {
         tiledMap.dispose();
         mainStage.dispose();
-        mainStage.dispose();
-
     }
+
     // Getting the properties of the current tile using the dice
     // Used in checkTileForSpecial and movePawn
     public static MapProperties getTileProperties(int tileNum)
