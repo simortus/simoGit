@@ -12,7 +12,7 @@ public class Dice
 {
     private static Random random = new Random();
     public static int dice;
-    private static int tileNum = 0;
+    public static int tileNum = 0;
     private static int targetTileNum = 0;
 
     public static void rollAndMove()
@@ -24,10 +24,9 @@ public class Dice
             tileNum += dice;
             if(tileNum <= 100)
             {
-                if(tileNum == 100){
-                    System.out.println("CONGRATULATION !!!!");
-
-                }
+//                if(tileNum == 100){
+//                    System.out.println("CONGRATULATION !!!!");
+//                }
                 if(PlayScreen.checkTileForSpecial(tileNum)) // If contains special
                 {
                     targetTileNum = PlayScreen.getTargetTileNum(PlayScreen.getTileProperties(tileNum));

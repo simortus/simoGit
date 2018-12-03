@@ -2,13 +2,17 @@ package com.mygdx.game.views;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TileBoard3;
+import com.mygdx.game.supp.Dice;
 
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
@@ -16,32 +20,36 @@ public class MenuScreen implements Screen {
     private final Stage stage;
     private TileBoard3 parent;
 
+    Texture background;
+
     public MenuScreen(TileBoard3 tileBoard3){
         parent = tileBoard3;
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
-        stage.draw();
+
     }
 
     @Override
     public void show() {
 
+        background = new Texture("hero.png");
         Table table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
+//        table.setDebug(true);
         stage.addActor(table);
+
 
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         TextButton play = new TextButton("Roll&Learn",skin);
-        TextButton credits = new TextButton("Credits",skin);
+
         TextButton exit = new TextButton("Exit",skin);
+
+        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background.jpg"))));
 
         table.add(play).fillX().uniformX();
         table.row().pad(10,0,10,0);
-        table.add(credits).fillX().uniformX();
-        table.row();
+
         table.add(exit).fillX().uniformX();
 
         exit.addListener(new ChangeListener() {
@@ -56,6 +64,7 @@ public class MenuScreen implements Screen {
                 parent.changeScreen(TileBoard3.APPLICATION);
             }
         });
+
     }
 
     @Override

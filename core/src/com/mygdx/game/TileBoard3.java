@@ -17,10 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
 import com.mygdx.game.supp.Dice;
-import com.mygdx.game.views.EndScreen;
-import com.mygdx.game.views.LoadingScreen;
-import com.mygdx.game.views.MenuScreen;
-import com.mygdx.game.views.PlayScreen;
+import com.mygdx.game.views.*;
 
 import static com.mygdx.game.supp.DiceSound.diceAudio;
 
@@ -35,9 +32,9 @@ public class TileBoard3 extends Game
     private PlayScreen playScreen;
     private EndScreen endScreen;
 
-    public static final int MENU = 0;
-    public static final int APPLICATION = 1;
-    public static final int ENDGAME = 2;
+    public static final int MENU = 1;
+    public static final int APPLICATION = 2;
+    public static final int ENDGAME = 3;
 
     @Override
     public void create()
@@ -61,6 +58,7 @@ public class TileBoard3 extends Game
                 if(endScreen == null) endScreen = new EndScreen(this);
                 this.setScreen(endScreen);
                 break;
+
         }
     }
 }

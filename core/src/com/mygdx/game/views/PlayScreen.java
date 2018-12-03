@@ -50,8 +50,8 @@ public class PlayScreen implements Screen {
     public void show() {
 
 // Dimensions of TiledMap
-        w = 12800;
-        h = 7680;
+        w = 1408;
+        h = 1152;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -60,7 +60,7 @@ public class PlayScreen implements Screen {
 
         mainStage = new Stage(viewport);
 
-        tiledMap = new TmxMapLoader().load("board640C.tmx");
+        tiledMap = new TmxMapLoader().load("board64B.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         texture = new Texture(Gdx.files.internal("icon.png"));
@@ -76,6 +76,10 @@ public class PlayScreen implements Screen {
         pawn.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
         mainStage.addActor(pawn);
 
+        if(Dice.tileNum == 100){
+
+            parent.changeScreen(TileBoard3.ENDGAME);
+        }
     }
 
     @Override
