@@ -14,11 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.Dice;
 
 import static com.mygdx.game.TileBoard3.mainStage;
+import static com.mygdx.game.supp.Dice.tileNum;
+import static com.mygdx.game.supp.DiceSound.diceAudio;
 
 public class PlayScreen implements Screen {
     private TileBoard3 parent;
@@ -34,6 +37,8 @@ public class PlayScreen implements Screen {
     private static MapObjects tileList; // List of objects
     private static MapObject tile; // An object from the list
     private static MapProperties tileProperties; // List with object properties
+
+    private static Timer timer;
 
     private Texture texture;
     private static Image pawn;
@@ -52,6 +57,8 @@ public class PlayScreen implements Screen {
 // Dimensions of TiledMap
         w = 1408;
         h = 1152;
+
+        timer = new Timer();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, w, h);
@@ -76,10 +83,7 @@ public class PlayScreen implements Screen {
         pawn.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
         mainStage.addActor(pawn);
 
-        if(Dice.tileNum == 100){
 
-            parent.changeScreen(TileBoard3.ENDGAME);
-        }
     }
 
     @Override
@@ -100,7 +104,17 @@ public class PlayScreen implements Screen {
         mainStage.act();
         mainStage.draw();
         Dice.rollAndMove();
-//        diceAudio();
+        if(tileNum == 100){
+            System.out.println("something");
+            timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    parent.changeScreen(TileBoard3.ENDGAME);
+
+                }
+            },5);
+            tileNum = 0;
+        }
     }
 
     @Override

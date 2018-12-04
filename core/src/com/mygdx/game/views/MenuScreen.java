@@ -20,7 +20,7 @@ public class MenuScreen implements Screen {
     private final Stage stage;
     private TileBoard3 parent;
 
-    Texture background;
+//    Texture background;
 
     public MenuScreen(TileBoard3 tileBoard3){
         parent = tileBoard3;
@@ -32,7 +32,6 @@ public class MenuScreen implements Screen {
     @Override
     public void show() {
 
-        background = new Texture("hero.png");
         Table table = new Table();
         table.setFillParent(true);
 //        table.setDebug(true);
@@ -51,6 +50,7 @@ public class MenuScreen implements Screen {
         table.row().pad(10,0,10,0);
 
         table.add(exit).fillX().uniformX();
+
 
         exit.addListener(new ChangeListener() {
             @Override

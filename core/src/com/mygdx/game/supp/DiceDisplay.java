@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import static com.mygdx.game.TileBoard3.mainStage;
 
 public class DiceDisplay {
-    static int dicePosX = 1920;
-    static int dicePosY = 5760;
+    static int dicePosX = 256;
+    static int dicePosY = 512;
 
     public static Texture tex;
     public static Image img;
@@ -24,6 +24,7 @@ public class DiceDisplay {
 
         img  = new Image(tex);
         img.setPosition(dicePosX, dicePosY);
+        img.setSize(tex.getWidth()/10f,tex.getHeight()/10f);
 
 
             mainStage.addActor(img);
