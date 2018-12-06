@@ -5,8 +5,11 @@ import com.badlogic.gdx.Input;
 
 import java.util.Random;
 
+import com.badlogic.gdx.audio.Sound;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.views.PlayScreen;
+
+import static com.mygdx.game.supp.DiceSound.diceAudio;
 
 public class Dice
 {
@@ -14,19 +17,23 @@ public class Dice
     public static int dice;
     public static int tileNum = 0;
     private static int targetTileNum = 0;
+    private static TileBoard3 parent;
+    private static Sound diceSound;
+
 
     public static void rollAndMove()
     {
+        diceSound = Gdx.audio.newSound(Gdx.files.internal("dice.mp3"));
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
         {
+            diceSound.play();
+
             dice = random.nextInt(6) + 1 ;
             DiceDisplay.diceImage(dice);
             tileNum += dice;
             if(tileNum <= 100)
             {
-//                if(tileNum == 100){
-//                    System.out.println("CONGRATULATION !!!!");
-//                }
+
                 if(PlayScreen.checkTileForSpecial(tileNum)) // If contains special
                 {
                     targetTileNum = PlayScreen.getTargetTileNum(PlayScreen.getTileProperties(tileNum));
