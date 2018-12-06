@@ -48,7 +48,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		checked: toggle-button
 	},
 	radio: {
-		font: font-label,
+		font: font-button,
 		fontColor: { a: 1, b: 1, g: 1, r: 1 },
 		downFontColor: { a: 1, b: 1, g: 0.2, r: 1 },
 		up: radio-button-off,
@@ -136,8 +136,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		background: label
 	},
 	title: {
-		font: font-title,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 },
+		font: font-button,
+		fontColor: { a: 1, b: 0, g: 0, r: 0 },
 		background: panel2
 	}
 },
