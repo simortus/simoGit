@@ -17,6 +17,11 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import static com.badlogic.gdx.math.MathUtils.random;
+import static com.mygdx.game.supp.PBLQuestions.pblAns;
+import static com.mygdx.game.supp.PBLQuestions.pblQues;
+import static com.mygdx.game.supp.PBLQuestions.pblRightAns;
+
 public class QuestionPopup {
     private static QAStorage ques;
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -51,22 +56,22 @@ public class QuestionPopup {
         });
         return button;
     }
-
+public static int randNr;
     public static void createQuestionWindow() {
         // Set a darker transparent background
         transparentBackground();
-
 //        ques = ArrayStorage.getRandomQuesAndAns();
-        qA = PlayScreen.questionAnswer;
+//        qA = PlayScreen.questionAnswer;
 
         SecureRandom random = new SecureRandom();
         int i = random.nextInt(3);
 
-        window = new Window("Question", skin);
-        window.add(questionDisplay(PBLQuestions.ques[i])).prefWidth(800).pad(20);
-        window.row();
+        QAStorage pbl = new QAStorage(pblQues[randNr],pblAns[randNr],pblAns[randNr][pblRightAns[randNr]]);
 
-        window.add(chooseBtn(PBLQuestions.ans[i][1])).pad(3);
+        window = new Window("Question", skin);
+        window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
+        window.row();
+        window.add(chooseBtn(pbl.getRightAnswer())).pad(3);
         window.row();
         window.add(chooseBtn("2. ")).pad(3);
         window.row();
@@ -95,8 +100,12 @@ public class QuestionPopup {
     public static void showQuestionWindow() {
         // ffffff00 equal to (r:1, g:1, b:1, a:0)
         // ffffffff equal to (r:1, g:1, b:1, a:1)
+        createQuestionWindow();
+
         window.addAction(Actions.fadeIn(.6f, Interpolation.smooth));
         transparentImg.addAction(Actions.fadeIn(.6f, Interpolation.smooth));
+         randNr = random.nextInt(3);
+        System.out.println(randNr);
     }
 
     public static void transparentBackground()

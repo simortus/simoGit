@@ -20,7 +20,7 @@ public class Dice
     private static TileBoard3 parent;
     private static Sound diceSound;
 
-    public static int quesRandom;
+
 
 
     public static void rollAndMove()
@@ -33,7 +33,6 @@ public class Dice
             diceSound.play();
 
             dice = random.nextInt(6) + 1 ;
-            quesRandom = random.nextInt(3);
 
             DiceDisplay.diceImage(dice);
             tileNum += dice;
