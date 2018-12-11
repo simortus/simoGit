@@ -13,7 +13,7 @@ public class PBLQuestions{
             {"1.Problem formulation", "2.Introduction", "3.Product concept", "4.SWOT analysis"},
             {"1.Strategy, Work, Obstacle and Threats ","2.Strength, Wage, Opportunity and Task","3.Strategy, Weakness, Opportunity and Threats","4.Strength, Weakness, Opportunities and Threats"}
     };
-    static int[] pblRightAns = {1,2,4};
+    static int[] pblRightAns = {1,2,3};
 
 //    QAStorage pbl = new QAStorage(ques[Dice.quesRandom],ans[Dice.quesRandom],ans[Dice.quesRandom][rightAns[Dice.quesRandom]]);
 //    String PBLquestion = test.getQuestion();

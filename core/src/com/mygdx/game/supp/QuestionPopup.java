@@ -15,6 +15,7 @@ import com.mygdx.game.views.PlayScreen;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Stack;
 
 import static com.badlogic.gdx.math.MathUtils.random;
@@ -56,8 +57,8 @@ public class QuestionPopup {
         });
         return button;
     }
-public static int randNr;
-    public static void createQuestionWindow() {
+
+    public static void createQuestionWindow(int randNr) {
         // Set a darker transparent background
         transparentBackground();
 //        ques = ArrayStorage.getRandomQuesAndAns();
@@ -100,11 +101,12 @@ public static int randNr;
     public static void showQuestionWindow() {
         // ffffff00 equal to (r:1, g:1, b:1, a:0)
         // ffffffff equal to (r:1, g:1, b:1, a:1)
-        createQuestionWindow();
+
+        int randNr = random.nextInt(3);
+        createQuestionWindow(randNr);
 
         window.addAction(Actions.fadeIn(.6f, Interpolation.smooth));
         transparentImg.addAction(Actions.fadeIn(.6f, Interpolation.smooth));
-         randNr = random.nextInt(3);
         System.out.println(randNr);
     }
 
