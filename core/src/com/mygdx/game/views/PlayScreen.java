@@ -1,6 +1,7 @@
 package com.mygdx.game.views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,6 +19,15 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
 import com.mygdx.game.supp.Dice;
+import com.mygdx.game.supp.Pawn;
+import com.mygdx.game.supp.QuestionPopup;
+import com.mygdx.game.supp.QuestionsImport;
+
+import java.io.File;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Stack;
 
 import static com.mygdx.game.TileBoard3.mainStage;
 import static com.mygdx.game.supp.Dice.tileNum;
@@ -40,11 +50,18 @@ public class PlayScreen implements Screen {
 
     private static Timer timer;
 
-    private Texture texture;
-    private static Image pawn;
 
-    int w;
-    int h;
+    private Texture texture,sheet;
+    private static Image pawn,pawn1,gradeSheet;
+
+    public static int w;
+    public static int h;
+
+//    private Stack<QuestionsImport> qA;
+    private ArrayList<String> answers;
+    public static ArrayList<Stack<QuestionsImport>> topics;
+    public static Stack<QuestionsImport> questionAnswer;
+    public static Stack<QuestionsImport> questionBackUp;
 
 
     public PlayScreen(TileBoard3 tileBoard3){
@@ -53,6 +70,21 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
+
+        File questions = new File("pblquestions.txt");
+        questionAnswer = new Stack<QuestionsImport>();
+        QuestionsImport.filler(questionAnswer,questions);
+        Collections.shuffle(questionAnswer);
+
+        questionBackUp = new Stack<QuestionsImport>();
+        questionBackUp.addAll(questionAnswer);
+
+        topics = new ArrayList<Stack<QuestionsImport>>();
+        Collections.shuffle(topics);
+
+//        Pawn player1 = new Pawn("Player1",Dice.dice);
+//        player1.setTileNumber(0);
+
 
 // Dimensions of TiledMap
         w = 1408;
@@ -71,18 +103,28 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         texture = new Texture(Gdx.files.internal("icon.png"));
+        sheet = new Texture(Gdx.files.internal("gradesheet.png"));
+
+        gradeSheet = new Image(sheet);
+        gradeSheet.setPosition(1050f,256f);
+        gradeSheet.setSize(350f,400f);
+
 
         // Creating a pawn in a starting position
+        getTileProperties(0);
         pawn = new Image(texture);
         pawn.setSize(texture.getWidth() * .8f, texture.getHeight() * .8f);
-        layerList = tiledMap.getLayers();
-        layer = layerList.get("Tiles");
-        tileList = layer.getObjects();
-        tile = tileList.get("0");
-        tileProperties = tile.getProperties();
         pawn.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
         mainStage.addActor(pawn);
 
+        // Creating second player in startion position
+        getTileProperties(-1);
+        pawn1 = new Image(texture);
+        pawn1.setSize(texture.getWidth() * .8f, texture.getHeight() * .8f);
+        pawn1.setPosition((Float) tileProperties.get("x"),(Float) tileProperties.get("y"));
+        mainStage.addActor(pawn1);
+
+        QuestionPopup.createQuestionWindow();
 
     }
 
@@ -105,7 +147,9 @@ public class PlayScreen implements Screen {
         mainStage.draw();
         Dice.rollAndMove();
         if(tileNum == 100){
-            System.out.println("something");
+
+            mainStage.addActor(gradeSheet);
+
             timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -114,6 +158,9 @@ public class PlayScreen implements Screen {
                 }
             },5);
             tileNum = 0;
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.D)){
+            QuestionPopup.showQuestionWindow();
         }
     }
 
@@ -199,4 +246,6 @@ public class PlayScreen implements Screen {
 
         pawn.addAction(sequenceAction);
     }
+
+
 }

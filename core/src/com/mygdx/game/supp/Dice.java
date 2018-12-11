@@ -20,17 +20,25 @@ public class Dice
     private static TileBoard3 parent;
     private static Sound diceSound;
 
+    public static int quesRandom;
+
 
     public static void rollAndMove()
     {
+//        Pawn pawn = new Pawn("Player",dice);
+
         diceSound = Gdx.audio.newSound(Gdx.files.internal("dice.mp3"));
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
         {
             diceSound.play();
 
             dice = random.nextInt(6) + 1 ;
+            quesRandom = random.nextInt(3);
+
             DiceDisplay.diceImage(dice);
             tileNum += dice;
+//            tileNum = pawn.getTileNumber();
+
             if(tileNum <= 100)
             {
 

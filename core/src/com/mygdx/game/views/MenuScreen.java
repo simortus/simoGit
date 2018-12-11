@@ -41,14 +41,18 @@ public class MenuScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         TextButton play = new TextButton("Roll&Learn",skin);
-
+        TextButton onePlayer = new TextButton("1-Player",skin);
+        TextButton twoPlayers = new TextButton("2-Players",skin);
         TextButton exit = new TextButton("Exit",skin);
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background.jpg"))));
 
-        table.add(play).fillX().uniformX();
+        table.add(onePlayer).fillX().uniformX();
         table.row().pad(10,0,10,0);
-
+//        table.add(onePlayer).fillX().uniformX();
+//        table.row();
+        table.add(twoPlayers).fillX().uniformX();
+        table.row();
         table.add(exit).fillX().uniformX();
 
 
@@ -58,7 +62,7 @@ public class MenuScreen implements Screen {
                 Gdx.app.exit();
             }
         });
-        play.addListener(new ChangeListener() {
+        onePlayer.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 parent.changeScreen(TileBoard3.APPLICATION);
