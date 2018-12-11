@@ -50,7 +50,7 @@ public class EndScreen implements Screen {
         playAgain.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.changeScreen(TileBoard3.APPLICATION);
+                parent.changeScreen(TileBoard3.PLAYGAME);
             }
         });
         exit.addListener(new ChangeListener() {
