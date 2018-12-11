@@ -1,38 +1,39 @@
 package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.TileBoard3;
 import com.mygdx.game.views.PlayScreen;
 
-public class QuestionPopup {
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.after;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
+public class QuestionPopup
+{
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     private static Window window;
     private static Image transparentImg;
 
-    public static Label questionDisplay(String name) {
+    private static Label questionDisplay(String name) {
         Label label = new Label(name, skin, "title");
         label.setWrap(true);
 //        label.setFontScale(1.2f);
         return label;
     }
 
-    public static Button chooseBtn(String name) {
-        Button button = new TextButton(name, skin, "radio");
+    private static Button chooseBtn(String name) {
+        Button button = new TextButton(name, skin);
         button.setTransform(true);
         button.scaleBy(.1f);
         return button;
     }
 
-    public static Button exitBtn(String name) {
+    private static Button exitBtn(String name) {
         Button button = new TextButton(name, skin);
         button.addListener(new ClickListener() {
             @Override
@@ -62,13 +63,14 @@ public class QuestionPopup {
         window.setMovable(false);
 //        window.debug();
         window.setPosition((PlayScreen.mapW - window.getWidth()) / 2f, ((PlayScreen.mapH - window.getHeight()) / 2f) + 4);
+        window.toFront();
 
         // Start by hiding the window (setting the alpha value zero)
 
         window.setColor(1, 1, 1, 0);
 
-        TileBoard3.playStage.addActor(window);
-        Gdx.input.setInputProcessor(TileBoard3.playStage);
+        PlayScreen.playStage.addActor(window);
+        Gdx.input.setInputProcessor(PlayScreen.playStage);
 
 //        System.out.println(window.getColor());
     }
@@ -76,15 +78,18 @@ public class QuestionPopup {
     public static void showQuestionWindow() {
         // ffffff00 equal to (r:1, g:1, b:1, a:0)
         // ffffffff equal to (r:1, g:1, b:1, a:1)
-        window.addAction(Actions.fadeIn(.6f, Interpolation.smooth));
-        transparentImg.addAction(Actions.fadeIn(.6f, Interpolation.smooth));
+        window.addAction(after(Actions.fadeIn(.6f, Interpolation.smooth)));
+        transparentImg.addAction(sequence(Actions.fadeIn(.6f, Interpolation.smooth)));
     }
 
-    public static void transparentBackground()
+//    delay((Dice2.dice * .5f))
+
+    private static void transparentBackground()
     {
         Texture texture = new Texture(Gdx.files.internal("transparency.png"));
         transparentImg = new Image(texture);
         transparentImg.setColor(1,1,1,0);
-        TileBoard3.playStage.addActor(transparentImg);
+
+        PlayScreen.playStage.addActor(transparentImg);
     }
 }

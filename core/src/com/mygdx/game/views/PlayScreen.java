@@ -1,94 +1,115 @@
 package com.mygdx.game.views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.mygdx.game.TileBoard3;
-import com.mygdx.game.supp.Dice;
+import com.mygdx.game.supp.Dice2;
+import com.mygdx.game.supp.Pawn;
+import com.mygdx.game.supp.QuestionPopup;
 
-import static com.mygdx.game.TileBoard3.mainStage;
-import static com.mygdx.game.supp.Dice.tileNum;
-import static com.mygdx.game.supp.DiceSound.diceAudio;
-
-public class PlayScreen implements Screen {
-    private TileBoard3 parent;
-
-    private OrthographicCamera camera;
-    private FillViewport viewport;
-
-    private static TiledMap tiledMap;
-    private OrthogonalTiledMapRenderer renderer;
-
-    private static MapLayers layerList;
-    private static MapLayer layer;
-    private static MapObjects tileList; // List of objects
-    private static MapObject tile; // An object from the list
-    private static MapProperties tileProperties; // List with object properties
-
-    private static Timer timer;
-
-    private Texture texture;
-    private static Image pawn;
-
-    int w;
-    int h;
+import java.util.concurrent.TimeUnit;
 
 
-    public PlayScreen(TileBoard3 tileBoard3){
+public class PlayScreen implements Screen
+{
+    public static TileBoard3 parent;
+    public static Stage playStage;
+
+    private OrthographicCamera camera = new OrthographicCamera();
+    private FillViewport viewport = new FillViewport(mapW, mapH, camera);
+
+    public static TiledMap tiledMap = new TmxMapLoader().load("board64B.tmx");
+    private OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(tiledMap);
+
+    // Creating an instance of the Class Pawn so to be able to use it's non static methods inside a static context
+    private Pawn player1;
+    private Pawn player2;
+    private int noOfPlayers;
+
+   // Dimensions of TiledMap
+   public static int mapW = 1408;
+   public static int mapH = 1152;
+
+
+    public PlayScreen(TileBoard3 tileBoard3, int noOfPlayers){
         parent = tileBoard3;
+        if(noOfPlayers == 1)
+        {
+            player1 = new Pawn();
+            player1.setName("Player1");
+//            System.out.println(player1.getName());
+            this.noOfPlayers = noOfPlayers;
+        }
+        if(noOfPlayers == 2)
+        {
+            player1 = new Pawn();
+            player1.setName("Player1");
+            player2 = new Pawn();
+            player2.setName("Player2");
+//            System.out.println(player1.getName() + " \n" + player2.getName());
+            this.noOfPlayers = noOfPlayers;
+        }
     }
 
     @Override
-    public void show() {
-
-// Dimensions of TiledMap
-        w = 1408;
-        h = 1152;
-
-        timer = new Timer();
-
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, w, h);
+    public void show()
+    {
+        playStage = new Stage(viewport);
+        camera.setToOrtho(false, mapW, mapH);
         camera.update();
-        viewport = new FillViewport(w, h, camera);
 
-        mainStage = new Stage(viewport);
+        // Setting the players pawns in stage
+        if (noOfPlayers == 1) {
+            player1.setInStage(1000);
+        }
+        if (noOfPlayers == 2)
+        {
+            player1.setInStage(1000);
+            player2.setInStage(2000);
+        }
 
-        tiledMap = new TmxMapLoader().load("board64B.tmx");
-        renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        // Setting in the playStage our question popup window
+        QuestionPopup.createQuestionWindow();
+    }
 
-        texture = new Texture(Gdx.files.internal("icon.png"));
-
-        // Creating a pawn in a starting position
-        pawn = new Image(texture);
-        pawn.setSize(texture.getWidth() * .8f, texture.getHeight() * .8f);
-        layerList = tiledMap.getLayers();
-        layer = layerList.get("Tiles");
-        tileList = layer.getObjects();
-        tile = tileList.get("0");
-        tileProperties = tile.getProperties();
-        pawn.setPosition((Float) tileProperties.get("x"), (Float) tileProperties.get("y"));
-        mainStage.addActor(pawn);
-
-
+    private String activePlayer = "player1";
+    private void checkAndPlay()
+    {
+        if (noOfPlayers == 2) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                if (activePlayer.equals("player1")) {
+                    System.out.println("Player1 Plays");
+                    Dice2.rollAndMove(player1, player1.getTileNum());
+                    QuestionPopup.showQuestionWindow();
+                    activePlayer = "player2";
+                } else {
+                    System.out.println("Player2 Plays");
+                    Dice2.rollAndMove(player2, player2.getTileNum());
+                    QuestionPopup.showQuestionWindow();
+                    activePlayer = "player1";
+                }
+            }
+        }else{
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+            {
+                System.out.println("Player1 Plays");
+                Dice2.rollAndMove(player1, player1.getTileNum());
+                QuestionPopup.showQuestionWindow();
+            }
+        }
     }
 
     @Override
-    public void render(float delta) {
-
+    public void render(float delta)
+    {
         Gdx.gl.glClearColor(.9038f, .9038f, .9038f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -101,19 +122,15 @@ public class PlayScreen implements Screen {
         renderer.render();
 
         // Instead of batch and sprites
-        mainStage.act();
-        mainStage.draw();
-        Dice.rollAndMove();
-        if(tileNum == 100){
-            System.out.println("something");
-            timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    parent.changeScreen(TileBoard3.ENDGAME);
+        playStage.act();
+        playStage.draw();
 
-                }
-            },5);
-            tileNum = 0;
+        checkAndPlay();
+
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D))
+        {
+            QuestionPopup.showQuestionWindow();
         }
     }
 
@@ -138,65 +155,9 @@ public class PlayScreen implements Screen {
     }
 
     @Override
-    public void dispose() {
+    public void dispose()
+    {
         tiledMap.dispose();
-        mainStage.dispose();
-    }
-
-    // Getting the properties of the current tile using the dice
-    // Used in checkTileForSpecial and movePawn
-    public static MapProperties getTileProperties(int tileNum)
-    {
-        layerList = tiledMap.getLayers();
-        layer = layerList.get("Tiles");
-        tileList = layer.getObjects();
-        tile = tileList.get(Integer.toString(tileNum));
-        tileProperties = tile.getProperties();
-
-        return tileProperties;
-    }
-
-
-    public static int getTargetTileNum(MapProperties tileProperties)
-    {
-        // Returns the value of the "goto" property
-        return (Integer) tileProperties.get("goto");
-    }
-
-    // Checking if the tile contains the special property and if yes getting it
-    public static boolean checkTileForSpecial(int tileNum)
-    {
-        MapProperties tileProperties = getTileProperties(tileNum);
-        boolean containSpecial = tileProperties.containsKey("special");
-
-        if (containSpecial)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    // This method can get divided
-    public static void movePawn(int tileNum, int targetTileNum, int dice)
-    {
-        dice -= 1;
-        SequenceAction sequenceAction = new SequenceAction();
-        while(dice >= 0)
-        {
-            tileNum -= dice;
-            MapProperties tileProperties = getTileProperties(tileNum);
-            sequenceAction.addAction(Actions.moveTo((Float) tileProperties.get("x"), (Float) tileProperties.get("y"), .5f, Interpolation.smooth));
-            tileNum += dice;
-            dice -= 1;
-        }
-
-        if (targetTileNum != 0)
-        {
-            MapProperties targetTileProperties = getTileProperties(targetTileNum);
-            sequenceAction.addAction(Actions.moveTo((Float) targetTileProperties.get("x"), (Float) targetTileProperties.get("y"), 1, Interpolation.smooth));
-        }
-
-        pawn.addAction(sequenceAction);
+        playStage.dispose();
     }
 }

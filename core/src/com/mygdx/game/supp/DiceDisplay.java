@@ -1,21 +1,18 @@
 package com.mygdx.game.supp;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import static com.mygdx.game.TileBoard3.mainStage;
+import static com.mygdx.game.views.PlayScreen.playStage;
 
 public class DiceDisplay {
-    static int dicePosX = 256;
-    static int dicePosY = 512;
+//    private static int dicePosX = 256;
+//    private static int dicePosY = 512;
+    private static int dicePosX = 265 * 4;
+    private static int dicePosY = 240;
 
-    public static Texture tex;
-    public static Image img;
+    private static Texture tex;
+    private static Image img;
 
     public static void diceImage(int dice) {
 
@@ -25,9 +22,10 @@ public class DiceDisplay {
         img  = new Image(tex);
         img.setPosition(dicePosX, dicePosY);
         img.setSize(tex.getWidth()/10f,tex.getHeight()/10f);
+//        img.toBack();
 
 
-            mainStage.addActor(img);
+            playStage.addActor(img);
             switch (dice) {
                 case 1:
                     img = new Image(tex);

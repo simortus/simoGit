@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.TileBoard3;
-import com.mygdx.game.supp.Dice;
 
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
@@ -26,7 +25,6 @@ public class MenuScreen implements Screen {
         parent = tileBoard3;
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-
     }
 
     @Override
@@ -40,15 +38,17 @@ public class MenuScreen implements Screen {
 
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        TextButton play = new TextButton("Roll&Learn",skin);
+        TextButton onePlayer = new TextButton("One Player",skin);
+        TextButton twoPlayers = new TextButton("Two players", skin);
 
         TextButton exit = new TextButton("Exit",skin);
 
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background.jpg"))));
 
-        table.add(play).fillX().uniformX();
+        table.add(onePlayer).fillX().uniformX();
         table.row().pad(10,0,10,0);
-
+        table.add(twoPlayers).fillX().uniformX();
+        table.row().pad(10,0,10,0);
         table.add(exit).fillX().uniformX();
 
 
@@ -58,18 +58,28 @@ public class MenuScreen implements Screen {
                 Gdx.app.exit();
             }
         });
-        play.addListener(new ChangeListener() {
+
+        onePlayer.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.changeScreen(TileBoard3.APPLICATION);
+                TileBoard3.noOfPlayers = 1;
+                parent.changeScreen(TileBoard3.PLAYGAME);
+            }
+        });
+
+        twoPlayers.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                TileBoard3.noOfPlayers = 2;
+                parent.changeScreen(TileBoard3.PLAYGAME);
             }
         });
 
     }
 
     @Override
-    public void render(float delta) {
-
+    public void render(float delta)
+    {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
@@ -77,8 +87,8 @@ public class MenuScreen implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
-
+    public void resize(int width, int height)
+    {
         stage.getViewport().update(width, height, true);
     }
 
