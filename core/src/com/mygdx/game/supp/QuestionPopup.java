@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.views.PlayScreen;
 
+import java.util.Random;
+
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.after;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
@@ -45,12 +47,14 @@ public class QuestionPopup
         return button;
     }
 
-    public static void createQuestionWindow() {
+    public static void createQuestionWindow(int randomNo) {
         // Set a darker transparent background
         transparentBackground();
 
+        QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randomNo], PBLQuestions.pblAns[randomNo], PBLQuestions.pblAns[randomNo][PBLQuestions.pblRightAns[randomNo]]);
+
         window = new Window("Question", skin);
-        window.add(questionDisplay("Write a program that reads an integer N and displays how many times can N be divided by 2 until it becomes 1.\nExample: 9/2 = 4 (since we are using the operator and are working with integers, we do not concern ourselves with partial numbers), then 4/2 = 2 and, lastly, 2/2 = 1. Therefore, 9 can be divided in half 3 times.\n\nChoose the correct answer")).prefWidth(800).pad(20);
+        window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
         window.row();
         window.add(chooseBtn("1. ap;sdfjk saoasdpjf oasdfj asoohasg")).pad(3);
         window.row();
@@ -72,12 +76,16 @@ public class QuestionPopup
         PlayScreen.playStage.addActor(window);
         Gdx.input.setInputProcessor(PlayScreen.playStage);
 
-//        System.out.println(window.getColor());
+      System.out.println(window.getColor());
     }
 
     public static void showQuestionWindow() {
         // ffffff00 equal to (r:1, g:1, b:1, a:0)
         // ffffffff equal to (r:1, g:1, b:1, a:1)
+        Random random = new Random();
+        int randomNo = random.nextInt(3);
+        createQuestionWindow(randomNo);
+
         window.addAction(after(Actions.fadeIn(.6f, Interpolation.smooth)));
         transparentImg.addAction(sequence(Actions.fadeIn(.6f, Interpolation.smooth)));
     }

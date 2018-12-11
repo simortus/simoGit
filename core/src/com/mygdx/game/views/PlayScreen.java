@@ -76,8 +76,6 @@ public class PlayScreen implements Screen
             player2.setInStage(2000);
         }
 
-        // Setting in the playStage our question popup window
-        QuestionPopup.createQuestionWindow();
     }
 
     private String activePlayer = "player1";
