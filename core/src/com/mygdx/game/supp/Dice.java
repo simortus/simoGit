@@ -1,4 +1,4 @@
-package com.mygdx.game.supp;
+/*package com.mygdx.game.supp;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -46,5 +46,5 @@ public class Dice
         }
     }
 
-}
+}*/
 
