@@ -13,8 +13,8 @@ import com.mygdx.game.views.PlayScreen;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.after;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import static com.mygdx.game.supp.PBLQuestions.pblAns;
-import static com.mygdx.game.supp.PBLQuestions.pblQues;
-import static com.mygdx.game.supp.PBLQuestions.pblRightAns;
+
+import static com.badlogic.gdx.math.MathUtils.random;
 
 public class QuestionPopup
 {
@@ -52,13 +52,16 @@ public class QuestionPopup
         // Set a darker transparent background
         transparentBackground();
 
-        QAStorage pbl = new QAStorage(pblQues[randNr],pblAns[randNr],pblAns[randNr][pblRightAns[randNr]]);
+//        QAStorage alg = new QAStorage(ALGQuestions.algQues[randNr],ALGQuestions.algAns[randNr], ALGQuestions.algAns[randNr][ALGQuestions.algRightAns[randNr]]);
+        QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr],PBLQuestions.pblAns[randNr],PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
+//        QAStorage oop = new QAStorage(OOPQuestions.oopQues[randNr],OOPQuestions.oopAns[randNr],OOPQuestions.oopAns[randNr][OOPQuestions.oopRightAns[randNr]]);
+
 
         window = new Window("Question", skin);
         window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
         window.row();
         for(int a = 0;a < 4; a++) {
-            window.add(chooseBtn(pblAns[randNr][a])).pad(3);
+            window.add(chooseBtn(PBLQuestions.pblAns[randNr][a])).pad(3);
             window.row();
         }
         window.add(exitBtn("Accept")).padBottom(10).padTop(25);
@@ -83,6 +86,9 @@ public class QuestionPopup
     public static void showQuestionWindow() {
         // ffffff00 equal to (r:1, g:1, b:1, a:0)
         // ffffffff equal to (r:1, g:1, b:1, a:1)
+        int randNr = random.nextInt(3);
+        createQuestionWindow(randNr);
+
         window.addAction(after(Actions.fadeIn(.6f, Interpolation.smooth)));
         transparentImg.addAction(sequence(Actions.fadeIn(.6f, Interpolation.smooth)));
     }
