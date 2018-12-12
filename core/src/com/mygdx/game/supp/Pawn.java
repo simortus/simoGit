@@ -12,11 +12,11 @@ import com.mygdx.game.views.PlayScreen;
 
 public class Pawn
 {
-    private MapLayers layerList;
-    private MapLayer layer;
-    private MapObjects tileList; // List of objects
-    private MapObject tile; // An object from the list
-    private MapProperties tileProperties; // List with object properties
+    private static MapLayers layerList;
+    private static MapLayer layer;
+    private static MapObjects tileList; // List of objects
+    private static MapObject tile; // An object from the list
+    public static MapProperties tileProperties; // List with object properties
 
     private Image pawn;
     private int tileNum = 0;
@@ -69,7 +69,7 @@ public class Pawn
 
     // Getting the properties of the current tile using the dice
     // Used in checkTileForSpecial and movePawn
-    public MapProperties getTileProperties(int tileNum)
+    public static MapProperties getTileProperties(int tileNum)
     {
         layerList = PlayScreen.tiledMap.getLayers();
         layer = layerList.get("Tiles");

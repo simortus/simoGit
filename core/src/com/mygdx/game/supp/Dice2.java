@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Dice2
 {
-    private static int tileNum;
+   public static int tileNum;
     private static int targetTileNum;
 
     private static Random random = new Random();
@@ -20,7 +20,7 @@ public class Dice2
 
     // Creating an instance of the Class Pawn so to be able to use it's methods in a static context
 //    Pawn playingPawn = new Pawn();
-    private static Pawn playingPawn;
+    public static Pawn playingPawn;
 
 
 

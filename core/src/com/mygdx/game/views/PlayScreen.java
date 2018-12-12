@@ -39,6 +39,7 @@ public class PlayScreen implements Screen
     public static int mapH = 1152;
 
 
+
     public PlayScreen(TileBoard3 tileBoard3, int noOfPlayers){
         parent = tileBoard3;
         if(noOfPlayers == 1)
@@ -77,7 +78,6 @@ public class PlayScreen implements Screen
         }
 
         // Setting in the playStage our question popup window
-        QuestionPopup.createQuestionWindow();
     }
 
     private String activePlayer = "player1";

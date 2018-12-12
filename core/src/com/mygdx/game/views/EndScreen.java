@@ -21,8 +21,8 @@ public class EndScreen implements Screen {
     private TileBoard3 parent;
 
     public EndScreen(TileBoard3 tileBoard3){
-        stage = new Stage(new ScreenViewport());
         parent = tileBoard3;
+        stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
     }
@@ -33,24 +33,23 @@ public class EndScreen implements Screen {
 
         Table table  = new Table();
         table.setFillParent(true);
-        stage.addActor(table);
-
-
 
 
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        TextButton playAgain = new TextButton("Play Again",skin);
+        TextButton mainMenu = new TextButton("Main Menu",skin);
         TextButton exit = new TextButton("Exit",skin);
+
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("passed.jpg"))));
 
-        table.add(playAgain).fillX().uniformX();
+        table.add(mainMenu).fillX().uniformX();
         table.row().pad(10,0,10,0);
         table.add(exit).fillX().uniformX();
-        playAgain.addListener(new ChangeListener() {
+
+        mainMenu.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.changeScreen(TileBoard3.PLAYGAME);
+                parent.changeScreen(TileBoard3.MENU);
             }
         });
         exit.addListener(new ChangeListener() {
@@ -60,6 +59,7 @@ public class EndScreen implements Screen {
             }
         });
 
+        stage.addActor(table);
     }
 
     @Override

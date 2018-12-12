@@ -33,7 +33,6 @@ public class MenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
 //        table.setDebug(true);
-        stage.addActor(table);
 
 
         Skin skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
@@ -74,6 +73,7 @@ public class MenuScreen implements Screen {
                 parent.changeScreen(TileBoard3.PLAYGAME);
             }
         });
+        stage.addActor(table);
 
     }
 

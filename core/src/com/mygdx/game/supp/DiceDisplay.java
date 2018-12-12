@@ -24,37 +24,32 @@ public class DiceDisplay {
         img.setSize(tex.getWidth()/10f,tex.getHeight()/10f);
 //        img.toBack();
 
+//        tex.dispose();
 
             playStage.addActor(img);
             switch (dice) {
                 case 1:
                     img = new Image(tex);
-
                     break;
 
                 case 2:
                     img = new Image(tex);
-
                     break;
 
                 case 3:
                     img = new Image(tex);
-
                     break;
 
                 case 4:
                     img = new Image(tex);
-
                     break;
 
                 case 5:
                     img = new Image(tex);
-
                     break;
 
                 case 6:
                     img = new Image(tex);
-
                     break;
 
             }

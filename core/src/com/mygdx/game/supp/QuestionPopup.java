@@ -10,14 +10,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.views.PlayScreen;
 
+import java.lang.reflect.Array;
+
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.after;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.mygdx.game.supp.Dice2.playingPawn;
 import static com.mygdx.game.supp.PBLQuestions.pblAns;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static com.mygdx.game.supp.Pawn.tileProperties;
+import static com.mygdx.game.supp.Dice2.tileNum;
 
-public class QuestionPopup
-{
+public class QuestionPopup {
+
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     private static Window window;
     private static Image transparentImg;
@@ -53,16 +58,55 @@ public class QuestionPopup
         transparentBackground();
 
 //        QAStorage alg = new QAStorage(ALGQuestions.algQues[randNr],ALGQuestions.algAns[randNr], ALGQuestions.algAns[randNr][ALGQuestions.algRightAns[randNr]]);
-        QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr],PBLQuestions.pblAns[randNr],PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
 //        QAStorage oop = new QAStorage(OOPQuestions.oopQues[randNr],OOPQuestions.oopAns[randNr],OOPQuestions.oopAns[randNr][OOPQuestions.oopRightAns[randNr]]);
 
-
         window = new Window("Question", skin);
-        window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
-        window.row();
-        for(int a = 0;a < 4; a++) {
-            window.add(chooseBtn(PBLQuestions.pblAns[randNr][a])).pad(3);
+
+        if (CourseProperties.checkForPbl()) {
+            QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr], PBLQuestions.pblAns[randNr], PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
+
+            window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
             window.row();
+            int a;
+            for ( a = 0; a < 4; a++) {
+                window.add(chooseBtn(PBLQuestions.pblAns[randNr][a])).pad(3);
+                window.row();
+            }
+            switch(a){
+                case 0:
+                    if(PBLQuestions.pblAns[randNr][0].equals(pbl.getRightAnswer())){
+                        window.setColor(1, 1, 1, 0);
+                    }
+                case 1:
+
+            }
+        }
+
+
+        if (CourseProperties.checkForOop()) {
+            QAStorage oop = new QAStorage(OOPQuestions.oopQues[randNr], OOPQuestions.oopAns[randNr], OOPQuestions.oopAns[randNr][OOPQuestions.oopRightAns[randNr]]);
+
+            window.add(questionDisplay(oop.getQuestion())).prefWidth(800).pad(20);
+            window.row();
+
+            for (int a = 0; a < 4; a++) {
+                window.add(chooseBtn(OOPQuestions.oopAns[randNr][a])).pad(3);
+                window.row();
+            }
+        }
+
+
+        if (CourseProperties.checkForAlgebra()) {
+            QAStorage alg = new QAStorage(ALGQuestions.algQues[randNr], ALGQuestions.algAns[randNr], ALGQuestions.algAns[randNr][ALGQuestions.algRightAns[randNr]]);
+
+            window.add(questionDisplay(alg.getQuestion())).prefWidth(800).pad(20);
+            window.row();
+
+            for (int a = 0; a < 4; a++) {
+                window.add(chooseBtn(ALGQuestions.algAns[randNr][a])).pad(3);
+                window.row();
+            }
+
         }
         window.add(exitBtn("Accept")).padBottom(10).padTop(25);
         window.pack();
@@ -83,6 +127,20 @@ public class QuestionPopup
 //        System.out.println(window.getColor());
     }
 
+//    public String getQuestionType (String  questionType,int randNr, int a){
+//
+//        String quest1 ="ALGQuestions.algAns["+randNr+"]["+a+"]";
+//
+//        switch(questionType){
+//            case 1:
+//                window.add(chooseBtn(quest1)).pad(3);
+//        }
+//
+//            window.add(chooseBtn(ALGQuestions.algAns[randNr][a])).pad(3);
+//            window.row();
+//
+//    }
+
     public static void showQuestionWindow() {
         // ffffff00 equal to (r:1, g:1, b:1, a:0)
         // ffffffff equal to (r:1, g:1, b:1, a:1)
@@ -95,12 +153,13 @@ public class QuestionPopup
 
 //    delay((Dice2.dice * .5f))
 
-    private static void transparentBackground()
-    {
+    private static void transparentBackground() {
         Texture texture = new Texture(Gdx.files.internal("transparency.png"));
         transparentImg = new Image(texture);
-        transparentImg.setColor(1,1,1,0);
+        transparentImg.setColor(1, 1, 1, 0);
 
         PlayScreen.playStage.addActor(transparentImg);
     }
 }
+
+
