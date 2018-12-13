@@ -1,7 +1,9 @@
 package com.mygdx.game.supp;
 
 public class OOPQuestions {
+
     static String[] oopQues = {
+
             "The default value of a static integer variable of a class in Java is?",
 
             "What will be printed as the output of the following program?\npublic class testincr\n{\n" +
