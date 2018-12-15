@@ -11,18 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.views.PlayScreen;
 
 
-import java.lang.reflect.Array;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.after;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.visible;
-import static com.mygdx.game.supp.Dice2.playingPawn;
-import static com.mygdx.game.supp.PBLQuestions.pblAns;
 
 import static com.badlogic.gdx.math.MathUtils.random;
-import static com.mygdx.game.supp.PBLQuestions.pblRightAns;
-import static com.mygdx.game.supp.Pawn.tileProperties;
-import static com.mygdx.game.supp.Dice2.tileNum;
 
 public class QuestionPopup {
 
@@ -51,6 +44,7 @@ public class QuestionPopup {
         button.scaleBy(.1f);
 
 
+
 //        button.addListener(new ClickListener(){
 //           @Override
 //           public void clicked(InputEvent event,float x,float y){
@@ -77,23 +71,107 @@ public class QuestionPopup {
         return button;
     }
 
-    public static void createQuestionWindow(int randNr) {
+    public static void createQuestionWindow(final int randNr) {
         // Set a darker transparent background
         transparentBackground();
 
-        boolean pblRightAns;
 
         window = new Window("Question", skin);
 
-        QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr], PBLQuestions.pblAns[randNr], PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
 
 
         if (CourseProperties.checkForPbl()) {
 
+            final QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr], PBLQuestions.pblAns[randNr], PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
 
             window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
             window.row();
 
+            Button ans1 = new TextButton(PBLQuestions.pblAns[randNr][0],skin);
+            ans1.setTransform(true);
+            ans1.scaleBy(.1f);
+
+            window.add(ans1);
+            window.row();
+
+            ans1.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event,float x,float y){
+
+                    if(PBLQuestions.pblAns[randNr][0].equals(pbl.getRightAnswer())){
+                        window.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+                        transparentImg.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+
+                    } else{
+                        System.out.println("this is not the right answer");
+                    }
+
+                }
+            });
+
+            Button ans2 = new TextButton(PBLQuestions.pblAns[randNr][1],skin);
+            ans2.setTransform(true);
+            ans2.scaleBy(.1f);
+
+            window.add(ans2);
+            window.row();
+
+            ans2.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event,float x,float y){
+
+                    if(PBLQuestions.pblAns[randNr][1].equals(pbl.getRightAnswer())){
+                        window.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+                        transparentImg.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+
+                    } else{
+                        System.out.println("this is not the right answer");
+                    }
+
+                }
+            });
+            Button ans3 = new TextButton(PBLQuestions.pblAns[randNr][2],skin);
+            ans3.setTransform(true);
+            ans3.scaleBy(.1f);
+
+            window.add(ans3);
+            window.row();
+
+            ans3.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event,float x,float y){
+
+                    if(PBLQuestions.pblAns[randNr][2].equals(pbl.getRightAnswer())){
+                        window.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+                        transparentImg.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+
+                    } else{
+                        System.out.println("this is not the right answer");
+                    }
+
+                }
+            });
+            Button ans4 = new TextButton(PBLQuestions.pblAns[randNr][3],skin);
+            ans4.setTransform(true);
+            ans4.scaleBy(.1f);
+
+            window.add(ans4);
+            window.row();
+
+            ans4.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event,float x,float y){
+
+                    if(PBLQuestions.pblAns[randNr][3].equals(pbl.getRightAnswer())){
+                        window.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+                        transparentImg.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+
+                    } else{
+                        System.out.println("this is not the right answer");
+                    }
+
+                }
+            });
 //            window.add(chooseBtn(PBLQuestions.pblAns[randNr][BUT1]));
 //            window.row();
 //            chooseBtn(PBLQuestions.pblAns[randNr][BUT1]).addListener(new ClickListener(){
@@ -104,21 +182,22 @@ public class QuestionPopup {
 //               }
 //            });
 
-            for(String answer : pbl.getAnswers()){
-                window.add(chooseBtn(answer));
-                window.row();
-                if(answer.equals(pbl.getRightAnswer())) {
-                    System.out.println("action");
-
-                    chooseBtn(answer).addListener(new ClickListener(){
-                        @Override
-                        public void clicked(InputEvent event,float x,float y){
-
-                            System.out.println("action");
-
-                        }
-                    });
-                }
+//            for(String answer : pbl.getAnswers()) {
+//                window.add(chooseBtn(answer));
+//                window.row();
+//
+//                if (answer.equals(pbl.getRightAnswer())) {
+//                    System.out.println("action");
+//
+//                    chooseBtn(answer).addListener(new ClickListener() {
+//                        @Override
+//                        public void clicked(InputEvent event, float x, float y) {
+//
+//
+//                        }
+//                    });
+//                }
+//            }
 //                    chooseBtn(PBLQuestions.pblAns[randNr][a]).addListener(new ClickListener(){
 //                        @Override
 //                        public void clicked(InputEvent event,float x, float y){
@@ -127,7 +206,7 @@ public class QuestionPopup {
 //                            window.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
 //                            transparentImg.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
 //
-                        }
+
 //                    });
 //                }
 //            }
