@@ -10,14 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.views.PlayScreen;
 
+
 import java.lang.reflect.Array;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.after;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.visible;
 import static com.mygdx.game.supp.Dice2.playingPawn;
 import static com.mygdx.game.supp.PBLQuestions.pblAns;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static com.mygdx.game.supp.PBLQuestions.pblRightAns;
 import static com.mygdx.game.supp.Pawn.tileProperties;
 import static com.mygdx.game.supp.Dice2.tileNum;
 
@@ -26,6 +29,14 @@ public class QuestionPopup {
     private static Skin skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     private static Window window;
     private static Image transparentImg;
+
+    private static int a;
+
+    private static final int BUT1 = 0;
+    private static final int BUT2 = 1;
+    private static final int BUT3 = 2;
+    private static final int BUT4 = 3;
+
 
     private static Label questionDisplay(String name) {
         Label label = new Label(name, skin, "title");
@@ -38,6 +49,18 @@ public class QuestionPopup {
         Button button = new TextButton(name, skin);
         button.setTransform(true);
         button.scaleBy(.1f);
+
+
+//        button.addListener(new ClickListener(){
+//           @Override
+//           public void clicked(InputEvent event,float x,float y){
+//
+////               name.equals()
+//
+//           }
+//        });
+
+
         return button;
     }
 
@@ -48,6 +71,7 @@ public class QuestionPopup {
             public void clicked(InputEvent event, float x, float y) {
                 window.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
                 transparentImg.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+
             }
         });
         return button;
@@ -57,29 +81,62 @@ public class QuestionPopup {
         // Set a darker transparent background
         transparentBackground();
 
-//        QAStorage alg = new QAStorage(ALGQuestions.algQues[randNr],ALGQuestions.algAns[randNr], ALGQuestions.algAns[randNr][ALGQuestions.algRightAns[randNr]]);
-//        QAStorage oop = new QAStorage(OOPQuestions.oopQues[randNr],OOPQuestions.oopAns[randNr],OOPQuestions.oopAns[randNr][OOPQuestions.oopRightAns[randNr]]);
+        boolean pblRightAns;
 
         window = new Window("Question", skin);
 
+        QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr], PBLQuestions.pblAns[randNr], PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
+
+
         if (CourseProperties.checkForPbl()) {
-            QAStorage pbl = new QAStorage(PBLQuestions.pblQues[randNr], PBLQuestions.pblAns[randNr], PBLQuestions.pblAns[randNr][PBLQuestions.pblRightAns[randNr]]);
+
 
             window.add(questionDisplay(pbl.getQuestion())).prefWidth(800).pad(20);
             window.row();
-            int a;
-            for ( a = 0; a < 4; a++) {
-                window.add(chooseBtn(PBLQuestions.pblAns[randNr][a])).pad(3);
-                window.row();
-            }
-            switch(a){
-                case 0:
-                    if(PBLQuestions.pblAns[randNr][0].equals(pbl.getRightAnswer())){
-                        window.setColor(1, 1, 1, 0);
-                    }
-                case 1:
 
-            }
+//            window.add(chooseBtn(PBLQuestions.pblAns[randNr][BUT1]));
+//            window.row();
+//            chooseBtn(PBLQuestions.pblAns[randNr][BUT1]).addListener(new ClickListener(){
+//               @Override
+//               public void clicked(InputEvent event,float x,float y){
+//
+//                   System.out.println("dddddddddddddddddd");
+//               }
+//            });
+
+            for(String answer : pbl.getAnswers()){
+                window.add(chooseBtn(answer));
+                window.row();
+                if(answer.equals(pbl.getRightAnswer())) {
+                    System.out.println("action");
+
+                    chooseBtn(answer).addListener(new ClickListener(){
+                        @Override
+                        public void clicked(InputEvent event,float x,float y){
+
+                            System.out.println("action");
+
+                        }
+                    });
+                }
+//                    chooseBtn(PBLQuestions.pblAns[randNr][a]).addListener(new ClickListener(){
+//                        @Override
+//                        public void clicked(InputEvent event,float x, float y){
+//
+//                            System.out.println("00000000");
+//                            window.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+//                            transparentImg.addAction(Actions.fadeOut(.6f, Interpolation.smooth));
+//
+                        }
+//                    });
+//                }
+//            }
+
+//for(int i = 0;i <4; i++) {
+//    System.out.println(PBLQuestions.pblAns[randNr][i]);
+//    System.out.println("this is right answer   " + pbl.getRightAnswer());
+//}
+
         }
 
 
@@ -89,7 +146,7 @@ public class QuestionPopup {
             window.add(questionDisplay(oop.getQuestion())).prefWidth(800).pad(20);
             window.row();
 
-            for (int a = 0; a < 4; a++) {
+            for ( a = 0; a < 4; a++) {
                 window.add(chooseBtn(OOPQuestions.oopAns[randNr][a])).pad(3);
                 window.row();
             }
@@ -102,7 +159,7 @@ public class QuestionPopup {
             window.add(questionDisplay(alg.getQuestion())).prefWidth(800).pad(20);
             window.row();
 
-            for (int a = 0; a < 4; a++) {
+            for ( a = 0; a < 4; a++) {
                 window.add(chooseBtn(ALGQuestions.algAns[randNr][a])).pad(3);
                 window.row();
             }
@@ -144,7 +201,7 @@ public class QuestionPopup {
     public static void showQuestionWindow() {
         // ffffff00 equal to (r:1, g:1, b:1, a:0)
         // ffffffff equal to (r:1, g:1, b:1, a:1)
-        int randNr = random.nextInt(3);
+        int randNr = random.nextInt(50);
         createQuestionWindow(randNr);
 
         window.addAction(after(Actions.fadeIn(.6f, Interpolation.smooth)));

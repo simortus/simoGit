@@ -57,4 +57,8 @@ public class TileBoard3 extends Game
             Gdx.app.exit();
         }
     }
+    @Override
+    public void dispose(){
+        super.dispose();
+    }
 }

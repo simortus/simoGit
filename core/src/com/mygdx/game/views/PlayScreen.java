@@ -80,7 +80,7 @@ public class PlayScreen implements Screen
         // Setting in the playStage our question popup window
     }
 
-    private String activePlayer = "player1";
+    public static String activePlayer = "player1";
     private void checkAndPlay()
     {
         if (noOfPlayers == 2) {
